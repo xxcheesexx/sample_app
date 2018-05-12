@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
     Micropost.where("user_id = ?", id)
   end
 
+  def feed
+    Micropost.from_users_followed_by(self)
+  end
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
